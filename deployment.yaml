@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spotify
+spec:
+  selector:
+    matchLabels:
+      name: spotify
+  template:
+    metadata:
+      labels:
+        name: spotify
+    spec:
+      containers:
+        - name: app-front-end
+          image: brunokino/spotify:latest
+          ports:
+            - containerPort: 8080
