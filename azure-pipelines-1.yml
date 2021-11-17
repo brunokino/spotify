@@ -83,10 +83,27 @@ stages:
 
 
 
+- stage: TestePreProd
+  displayName: Test Pre-Prod
+  jobs:
+  - job: TestePreProd
+    displayName: Test Pre-Prod
+    pool:
+      name: default
+    steps:
+      - task: PowerShell@2
+        inputs:
+          targetType: 'inline'
+          script: |
+            # Write your PowerShell commands here.
+            
+            Write-Host "Testing HTTP Status Code"
+            curl http://20.107.152.32:8080/
+
 
 - stage: Deploy
   displayName: Deploy stage
-  dependsOn: Build
+  dependsOn: TestePreProd
 
   jobs:
   - deployment: Deploy
@@ -119,11 +136,11 @@ stages:
               containers: '$(containerRegistry)/$(imageRepository):$(tag)'
               imagePullSecrets: '$(imagePullSecret)'
 
-- stage: Teste
-  displayName: Test stage
+- stage: TesteProd
+  displayName: Test Production
   jobs:
-  - job: Test
-    displayName: Test
+  - job: TesteProd
+    displayName: Test Production
     pool:
       name: default
     steps:
