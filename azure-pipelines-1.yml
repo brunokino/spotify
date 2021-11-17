@@ -80,3 +80,19 @@ stages:
               containers: '$(containerRegistry)/$(imageRepository):$(tag)'
               imagePullSecrets: '$(imagePullSecret)'
 
+- stage: Teste
+  displayName: Test stage
+  jobs:
+  - job: Test
+    displayName: Test
+    pool:
+      name: default
+    steps:
+      - task: PowerShell@2
+        inputs:
+          targetType: 'inline'
+          script: |
+            # Write your PowerShell commands here.
+            
+            Write-Host "Testing HTTP Status Code"
+            curl http://20.82.250.95:8080/
