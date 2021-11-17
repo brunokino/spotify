@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: spotify-stage 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spotify-stage
+  template:
+    metadata:
+      labels:
+        app: spotify-stage 
+    spec:
+      containers:
+        - name: spotify-stage 
+          image: labkino.azurecr.io/spotify
+          ports:
+          - containerPort: 8080
