@@ -46,12 +46,12 @@ stages:
       artifact: manifests
 
 
-- stage: Deploy Pre-prod
+- stage: Deploy-Pre-prod
   displayName: Deploy Pre-prod
   dependsOn: Build
 
   jobs:
-  - deployment: Deploy Pre-prod
+  - deployment: Deploy-Pre-prod
     displayName: Deploy Pre-prod
     pool:
       name: default
